@@ -1,0 +1,102 @@
+# --- Python / Django ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Virtual environments
+.env
+.env*/
+.venv/
+venv/
+myenv/
+ENV/
+env/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+.eggs/
+parts/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django stuff
+local_settings.py
+settings_local.py
+settings_dev.py
+settings_prod.py
+
+# SQLite database
+*.sqlite3
+db.sqlite3
+
+# Media & collected static (rebuildable)
+/media/
+/staticfiles/
+/static_collected/
+
+# Django logs
+*.log
+
+# Coverage / test
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node / frontend (if added later)
+node_modules/
+*.tsbuildinfo
+
+# Byte-compiled / optimized / C extensions
+*.so
+
+# Profiling data
+.prof
+
+# Security / secrets
+secrets.json
+.env.sample # keep template separately (rename if needed)
+
+# Mypy / lint
+.mypy_cache/
+.dmypy.json
+.pyre/
+ruff_cache/
+
+# Local tooling
+/.devcontainer/
+/.docker/
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# Lock files (optional; keep if you commit them intentionally)
+Pipfile.lock
+poetry.lock
+package-lock.json
+yarn.lock
