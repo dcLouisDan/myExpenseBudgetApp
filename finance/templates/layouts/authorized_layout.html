@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<aside class="fixed h-screen l-0 w-64">
+    <header class="flex p-4">
+        <h1 class="font-bold text-xl">My Finance App</h1>
+    </header>
+    <nav>
+        <ul>
+             {% include "components/nav_item.html" with url="/" label="Home" %}
+        </ul>
+    </nav>
+</aside>
+<main class="ml-64 min-h-screen bg-gray-100">
+{% block content %}
+    {% endblock %}
+</main>
+{% endblock %}
