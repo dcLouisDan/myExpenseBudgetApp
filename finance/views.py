@@ -45,13 +45,13 @@ class BudgetDetailView(LoginRequiredMixin, DetailView):
 
 class BudgetCreateView(LoginRequiredMixin, CreateView):
     model = Budget
-    fields = [
-        'name',
-        'total_amount',
-        'start_date',
-        'end_date',
-    ]
-    success_url = '/'
+    template_name = "budget/create.html"
+    form_class = forms.BudgetForm
+    success_url = '/budgets'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class BudgetUpdateView(LoginRequiredMixin, UpdateView):

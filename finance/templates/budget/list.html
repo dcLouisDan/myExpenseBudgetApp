@@ -7,4 +7,11 @@
 <div>
     <a href="/budgets/create">Add Budget</a>
 </div>
+<div>
+    <ol>
+    {% for budget in budgets %}
+        <li>{{ budget.name }}</li>
+    {% endfor %}
+    </ol>
+</div>
 {% endblock %}
