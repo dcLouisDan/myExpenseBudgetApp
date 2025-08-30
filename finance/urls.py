@@ -7,7 +7,7 @@ urlpatterns = [
     path("login", views.login_view, name="login"),
 
     # Budget
-    path("budgets", views.BudgetListView.as_view(), name="budgets"),
+    path("budgets", views.BudgetListView.as_view(), name="budget-list"),
     path("budgets/<int:pk>", views.BudgetDetailView.as_view(), name="budget-detail"),
     path("budgets/create", views.BudgetCreateView.as_view(), name="budget-create"),
     path("budgets/<int:pk>/update", views.BudgetUpdateView.as_view(), name="budget-update"),

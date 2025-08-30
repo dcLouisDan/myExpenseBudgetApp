@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from . import forms
@@ -37,10 +38,18 @@ class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
     template_name = "budget/list.html"
     context_object_name = "budgets"
+    extra_context = {
+        "title": "Budget List",
+    }
 
 
 class BudgetDetailView(LoginRequiredMixin, DetailView):
     model = Budget
+    template_name = "budget/detail.html"
+    context_object_name = "budget"
+    extra_context = {
+        "title": "Budget Detail",
+    }
 
 
 class BudgetCreateView(LoginRequiredMixin, CreateView):
@@ -48,6 +57,9 @@ class BudgetCreateView(LoginRequiredMixin, CreateView):
     template_name = "budget/create.html"
     form_class = forms.BudgetForm
     success_url = '/budgets'
+    extra_context = {
+        "title": "Budget Create",
+    }
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -56,10 +68,25 @@ class BudgetCreateView(LoginRequiredMixin, CreateView):
 
 class BudgetUpdateView(LoginRequiredMixin, UpdateView):
     model = Budget
+    template_name = "budget/update.html"
+    form_class = forms.BudgetForm
+    extra_context = {
+        "title": "Budget Update",
+    }
+
+    def get_success_url(self):
+        return reverse_lazy("budget-detail", kwargs={"pk": self.object.pk})
+
 
 
 class BudgetDeleteView(LoginRequiredMixin, DeleteView):
     model = Budget
+    context_object_name = "budget"
+    template_name = "budget/delete.html"
+    success_url = '/budgets'
+    extra_context = {
+        'title': 'Budget Delete',
+    }
 
 
 class CategoryListView(LoginRequiredMixin, ListView):

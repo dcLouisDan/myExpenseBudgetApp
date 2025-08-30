@@ -23,15 +23,26 @@
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 
     <style type="text/tailwindcss">
-
         @theme{
             --font-display: 'Lato', serif;
             --color-primary: #2b2b2b;
             --color-primary-foreground: #ffffff;
         }
+
+        a {
+            color: #0000ff;
+
+            &:hover {
+                color: #6b6bff;
+            }
+        }
+
+        button {
+            cursor: pointer;
+        }
     </style>
 </head>
-<body class="font-display">
+<body class="font-display" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 {% block body %} {% endblock %}
 </body>
 </html>

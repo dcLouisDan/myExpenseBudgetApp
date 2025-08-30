@@ -1,17 +1,34 @@
 {% extends 'layouts/authenticated_layout.html' %}
 
-{% block title %}Manage Budget{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<h1 class="p-4 font-bold text-xl">Manage Budget</h1>
-<div>
-    <a href="/budgets/create">Add Budget</a>
+<div class="p-4 flex w-full justify-between items-center">
+    <h1 class="font-bold text-xl">{{ title }}</h1>
+        <a class="text-blue-500 hover:text-blue-600 hover:underline" href="/budgets/create">Add Budget</a>
 </div>
-<div>
-    <ol>
-    {% for budget in budgets %}
-        <li>{{ budget.name }}</li>
-    {% endfor %}
-    </ol>
+<div class="p-4">
+    <table class="table-auto w-full">
+        <thead class="border-b font-bold">
+        <tr>
+            <th>Name</th>
+            <th>Total Amount</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for budget in budgets %}
+        <tr class="text-center">
+            <td class="text-left">
+                <a href="/budgets/{{ budget.id }}">{{ budget.name }}</a>
+            </td>
+            <td>{{ budget.total_amount}}</td>
+            <td>{{ budget.start_date}}</td>
+            <td>{{ budget.end_date }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
