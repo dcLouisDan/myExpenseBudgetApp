@@ -37,3 +37,9 @@ class BudgetForm(forms.ModelForm):
                 'type': 'date',
             }),
         }
+
+    def clean_total_amount(self):
+        total_amount = self.cleaned_data['total_amount']
+        if total_amount < 0:
+            raise forms.ValidationError('Total amount cannot be negative')
+        return total_amount

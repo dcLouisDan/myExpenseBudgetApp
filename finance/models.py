@@ -1,3 +1,6 @@
+from tabnanny import check
+
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -21,8 +24,18 @@ class Budget(models.Model):
     def __str__(self):
         return self.name
 
+    def clean(self):
+        if self.start_date > self.end_date:
+            raise ValidationError('Start date must be before end date')
+        if self.total_amount < 0:
+            raise ValidationError('Total amount must be greater than 0')
+
     class Meta:
         ordering = ['name']
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'name'], name='unique_name'),
+            models.CheckConstraint(check=models.Q(total_amount__gte=0), name='amount_non_negative'),
+        ]
 
 
 class Category(models.Model):
