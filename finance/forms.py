@@ -43,3 +43,13 @@ class BudgetForm(forms.ModelForm):
         if total_amount < 0:
             raise forms.ValidationError('Total amount cannot be negative')
         return total_amount
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = models.Category
+        fields= ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': INPUT_STYLE_BASE,
+            })
+        }

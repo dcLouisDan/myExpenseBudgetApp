@@ -1,0 +1,8 @@
+{% for category in categories %}
+<tr class="text-center">
+    <td>{{ category.name }}</td>
+    <td>
+        <button hx-target="#category-form" hx-get="/categories/{{ category.id }}/update-form">Edit</button>
+    </td>
+</tr>
+{% endfor %}

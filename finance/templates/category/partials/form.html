@@ -1,0 +1,9 @@
+<form hx-post="{{ form_url }}" hx-target="#category-table-body"
+      hx-on::after-request="this.reset()"
+      class="space-y-2"
+>
+    <div>
+        {{ form }}
+    </div>
+    {% include 'components/button.html' with label='Submit' type='submit' %}
+</form>

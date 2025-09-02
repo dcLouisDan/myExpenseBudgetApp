@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -78,7 +78,6 @@ class BudgetUpdateView(LoginRequiredMixin, UpdateView):
         return reverse_lazy("budget-detail", kwargs={"pk": self.object.pk})
 
 
-
 class BudgetDeleteView(LoginRequiredMixin, DeleteView):
     model = Budget
     context_object_name = "budget"
@@ -91,6 +90,54 @@ class BudgetDeleteView(LoginRequiredMixin, DeleteView):
 
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
+    template_name = "category/index.html"
+    context_object_name = "categories"
+    extra_context = {
+        "title": "Categories",
+        "form": forms.CategoryForm,
+    }
+
+
+@login_required(login_url='login')
+def create_category(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        if name:
+            Category.objects.create(name=name)
+
+        categories = Category.objects.all()
+        context = {
+            'categories': categories,
+        }
+        return render(request, "category/partials/table_rows.html", context)
+
+
+@login_required(login_url='login')
+def update_category_form(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    form = forms.CategoryForm(instance=category)
+    context = {
+        'form': form,
+        'form_url': '/categories/' + str(pk) + '/update',
+    }
+    return render(request, "category/partials/form.html", context)
+
+
+@login_required(login_url='login')
+def update_category(request, pk):
+    if request.method == "POST":
+        category = get_object_or_404(Category, pk=pk)
+        name = request.POST.get("name")
+        if name:
+            form = forms.CategoryForm(request.POST, instance=category)
+            if form.is_valid():
+                form.save()
+
+        categories = Category.objects.all()
+        context = {
+            'categories': categories,
+        }
+        return render(request, "category/partials/table_rows.html", context)
 
 
 class CategoryDetailView(LoginRequiredMixin, DetailView):

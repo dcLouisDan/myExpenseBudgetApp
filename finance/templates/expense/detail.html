@@ -1,0 +1,22 @@
+{% extends 'layouts/authenticated_layout.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1 class="p-4 font-bold text-xl">{{ title }}</h1>
+<div class="px-4">
+    <a href="/budgets">View Budget List</a>
+</div>
+<div class="p-4">
+    <ul>
+        <li>Name: {{ budget.name }}</li>
+        <li>Total Amount: {{ budget.total_amount}}</li>
+        <li>Start Date: {{ budget.start_date}}</li>
+        <li>End Date: {{ budget.end_date }}</li>
+    </ul>
+    <div class="flex gap-4 items-center">
+        <a href="/budgets/{{ budget.id }}/update">Update</a>
+        <a href="/budgets/{{ budget.id }}/delete">Delete</a>
+    </div>
+</div>
+{% endblock %}

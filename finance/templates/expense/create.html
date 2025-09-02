@@ -1,0 +1,18 @@
+{% extends 'layouts/authenticated_layout.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1 class="p-4 font-bold text-xl">{{ title }}</h1>
+<div>
+    <a href="/budgets">View Budget List</a>
+</div>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        {% include 'components/button.html' with label='Submit' type='submit' %}
+    </form>
+</div>
+{% endblock %}

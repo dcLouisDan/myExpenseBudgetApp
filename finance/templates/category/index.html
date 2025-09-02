@@ -1,0 +1,33 @@
+{% extends 'layouts/authenticated_layout.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="p-4 flex w-full justify-between items-center">
+    <h1 class="font-bold text-xl">{{ title }}</h1>
+</div>
+<div class="p-4 max-w-md space-y-4">
+    <div id="category-form">
+        <form hx-post="/categories/create" hx-target="#category-table-body"
+              hx-on::after-request="this.reset()"
+              class="space-y-2"
+        >
+            <div>
+                {{ form }}
+            </div>
+            {% include 'components/button.html' with label='Submit' type='submit' %}
+        </form>
+    </div>
+    <table class="table-auto w-full border bg-white">
+        <thead class="border-b font-bold">
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="category-table-body">
+        {% include 'category/partials/table_rows.html' %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,3 +1,4 @@
+import datetime
 from tabnanny import check
 
 from django.core.exceptions import ValidationError
@@ -39,7 +40,7 @@ class Budget(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -63,6 +64,12 @@ class Expense(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        if self.date > datetime.date.today():
+            raise ValidationError('Date must be before or equal to today')
+        if self.amount < 0:
+            raise ValidationError('Amount must be greater than 0')
 
     class Meta:
         ordering = ['-created_at']
