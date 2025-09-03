@@ -1,0 +1,7 @@
+<form hx-post="/categories/{{ category.id }}/delete"
+      hx-target="#category-table-body"
+      method="post" class="bg-red-200 flex items-center justify-center gap-2">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+    <button type="button" hx-get="/categories/{{ category.id }}/action-cell" hx-target="#category-action-{{ category.id }}">Cancel</button>
+</form>

@@ -1,0 +1,14 @@
+<button
+        hx-target="#category-form"
+        hx-get="/categories/{{ category.id }}/update-form"
+        class="text-blue-500"
+>
+    Edit
+</button>
+<button
+        hx-target="#category-action-{{ category.id }}"
+        hx-get="/categories/{{ category.id }}/delete-form"
+        class="text-red-500"
+>
+    Delete
+</button>

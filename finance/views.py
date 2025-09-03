@@ -99,6 +99,15 @@ class CategoryListView(LoginRequiredMixin, ListView):
 
 
 @login_required(login_url='login')
+def category_action_cell(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    context = {
+        'category': category,
+    }
+    return render(request, 'category/partials/action_cell.html', context)
+
+
+@login_required(login_url='login')
 def create_category(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -132,6 +141,28 @@ def update_category(request, pk):
             form = forms.CategoryForm(request.POST, instance=category)
             if form.is_valid():
                 form.save()
+
+        categories = Category.objects.all()
+        context = {
+            'categories': categories,
+        }
+        return render(request, "category/partials/table_rows.html", context)
+
+
+@login_required(login_url='login')
+def delete_category_form(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    context = {
+        'category': category,
+    }
+    return render(request, "category/partials/delete_row.html", context)
+
+
+@login_required(login_url='login')
+def delete_category(request, pk):
+    if request.method == "POST":
+        category = get_object_or_404(Category, pk=pk)
+        category.delete()
 
         categories = Category.objects.all()
         context = {

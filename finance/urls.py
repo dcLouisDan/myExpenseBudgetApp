@@ -16,6 +16,9 @@ urlpatterns = [
     # Category
     path("categories", views.CategoryListView.as_view(), name="category-list"),
     path("categories/create", views.create_category, name="category-create"),
+    path("categories/<int:pk>/action-cell", views.category_action_cell, name="category-action-cell"),
     path("categories/<int:pk>/update-form", views.update_category_form, name="category-update-form"),
     path("categories/<int:pk>/update", views.update_category, name="category-update"),
+    path("categories/<int:pk>/delete-form", views.delete_category_form, name="category-delete-form"),
+    path("categories/<int:pk>/delete", views.delete_category, name="category-delete"),
 ]
