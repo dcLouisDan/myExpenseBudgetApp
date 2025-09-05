@@ -5,13 +5,13 @@
 {% block content %}
 <h1 class="p-4 font-bold text-xl">{{ title }}</h1>
 <div class="px-4">
-    <a href="/budgets/{{ budget.id }}">Cancel Delete</a>
+    <a href="/expenses/{{ expense.id }}">Cancel Delete</a>
 </div>
 <div class="p-4">
     <form method="post">
         {% csrf_token %}
-        <p>Are you sure you want to delete this budget?</p>
-        <p class="font-bold py-4">{{ budget.name }} : {{ budget.total_amount }}</p>
+        <p>Are you sure you want to delete this expense?</p>
+        <p class="font-bold py-4">{{ expense.name }} : {{ expense.amount }}</p>
         <button type="submit" class="text-red-500 hover:text-red-400 hover:underline">
             Delete
         </button>

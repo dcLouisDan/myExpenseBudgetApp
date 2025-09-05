@@ -5,27 +5,37 @@
 {% block content %}
 <div class="p-4 flex w-full justify-between items-center">
     <h1 class="font-bold text-xl">{{ title }}</h1>
-        <a class="text-blue-500 hover:text-blue-600 hover:underline" href="/budgets/create">Add Budget</a>
+        <a class="text-blue-500 hover:text-blue-600 hover:underline" href="/expenses/create">Add Expense</a>
 </div>
 <div class="p-4">
     <table class="table-auto w-full">
         <thead class="border-b font-bold">
         <tr>
+            <th>Date</th>
             <th>Name</th>
-            <th>Total Amount</th>
-            <th>Start Date</th>
-            <th>End Date</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Budget</th>
         </tr>
         </thead>
         <tbody>
-        {% for budget in budgets %}
+        {% for expense in expenses %}
         <tr class="text-center">
-            <td class="text-left">
-                <a href="/budgets/{{ budget.id }}">{{ budget.name }}</a>
+            <td>
+                {{ expense.date }}
             </td>
-            <td>{{ budget.total_amount}}</td>
-            <td>{{ budget.start_date}}</td>
-            <td>{{ budget.end_date }}</td>
+            <td class="text-left">
+                <a href="/expenses/{{ expense.id }}">{{ expense.name }}</a>
+            </td>
+            <td>
+                {{ expense.amount }}
+            </td>
+            <td>
+                {{ expense.category.name }}
+            </td>
+            <td>
+                {{ expense.budget.name }}
+            </td>
         </tr>
         {% endfor %}
         </tbody>

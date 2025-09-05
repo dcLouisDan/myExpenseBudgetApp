@@ -21,4 +21,12 @@ urlpatterns = [
     path("categories/<int:pk>/update", views.update_category, name="category-update"),
     path("categories/<int:pk>/delete-form", views.delete_category_form, name="category-delete-form"),
     path("categories/<int:pk>/delete", views.delete_category, name="category-delete"),
+
+    # Expense
+    path("expenses", views.ExpenseListView.as_view(), name="expense-list"),
+    path("expenses/<int:pk>", views.ExpenseDetailView.as_view(), name="expense-detail"),
+    path("expenses/create", views.ExpenseCreateView.as_view(), name="expense-create"),
+    path("expenses/<int:pk>/update", views.ExpenseUpdateView.as_view(), name="expense-update"),
+    path("expenses/<int:pk>/delete", views.ExpenseDeleteView.as_view(), name="expense-delete"),
+
 ]

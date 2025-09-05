@@ -171,25 +171,61 @@ def delete_category(request, pk):
         return render(request, "category/partials/table_rows.html", context)
 
 
-class CategoryDetailView(LoginRequiredMixin, DetailView):
-    model = Category
-
-
 class ExpenseListView(LoginRequiredMixin, ListView):
     model = Expense
+    template_name = 'expense/list.html'
+    context_object_name = "expenses"
+    extra_context = {
+        "title": "Expense List",
+    }
+
+    def get_queryset(self):
+        return Expense.objects.select_related('category','budget')
 
 
 class ExpenseDetailView(LoginRequiredMixin, DetailView):
     model = Expense
+    template_name = 'expense/detail.html'
+    context_object_name = "expense"
+    extra_context = {
+        "title": "Expense Detail",
+    }
+
+    def get_queryset(self):
+        return Expense.objects.select_related('category','budget', 'user')
 
 
 class ExpenseCreateView(LoginRequiredMixin, CreateView):
     model = Expense
+    form_class = forms.ExpenseForm
+    template_name = 'expense/create.html'
+    success_url = '/expenses'
+    extra_context = {
+        "title": "Expense Create",
+    }
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
     model = Expense
+    form_class = forms.ExpenseForm
+    template_name = 'expense/update.html'
+    extra_context = {
+        "title": "Expense Update",
+    }
+
+    def get_success_url(self):
+        return reverse_lazy("expense-detail", kwargs={"pk": self.object.pk})
 
 
 class ExpenseDeleteView(LoginRequiredMixin, DeleteView):
     model = Expense
+    context_object_name = "expense"
+    template_name = "expense/delete.html"
+    success_url = '/expenses'
+    extra_context = {
+        "title": "Expense Delete",
+    }

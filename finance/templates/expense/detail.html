@@ -5,18 +5,22 @@
 {% block content %}
 <h1 class="p-4 font-bold text-xl">{{ title }}</h1>
 <div class="px-4">
-    <a href="/budgets">View Budget List</a>
+    <a href="/expenses">View Expenses List</a>
 </div>
 <div class="p-4">
     <ul>
-        <li>Name: {{ budget.name }}</li>
-        <li>Total Amount: {{ budget.total_amount}}</li>
-        <li>Start Date: {{ budget.start_date}}</li>
-        <li>End Date: {{ budget.end_date }}</li>
+        <li>Name: {{ expense.name }}</li>
+        <li>Amount: {{ expense.amount}}</li>
+        <li>Date: {{ expense.date}}</li>
+        <li>Category: {{ expense.category.name }}</li>
+        <li>Budget: {{ expense.budget.name }}</li>
+        <li>Description: {{ expense.description }}</li>
+        <li>Notes: {{ expense.notes}}</li>
+        <li>Recorded by: {{ expense.user.username }}</li>
     </ul>
     <div class="flex gap-4 items-center">
-        <a href="/budgets/{{ budget.id }}/update">Update</a>
-        <a href="/budgets/{{ budget.id }}/delete">Delete</a>
+        <a href="/expenses/{{ expense.id }}/update">Update</a>
+        <a href="/expenses/{{ expense.id }}/delete">Delete</a>
     </div>
 </div>
 {% endblock %}

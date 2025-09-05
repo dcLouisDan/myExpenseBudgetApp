@@ -53,3 +53,32 @@ class CategoryForm(forms.ModelForm):
                 'class': INPUT_STYLE_BASE,
             })
         }
+
+class ExpenseForm(forms.ModelForm):
+    class Meta:
+        model = models.Expense
+        fields = ['date','name', 'amount','budget', 'category', 'description', 'notes']
+        widgets = {
+            'date': forms.DateInput(attrs={
+                'class': INPUT_STYLE_BASE,
+                'type': 'date',
+            }),
+            'name': forms.TextInput(attrs={
+                'class': INPUT_STYLE_BASE,
+            }),
+            'amount': forms.NumberInput(attrs={
+                'class': INPUT_STYLE_BASE,
+            }),
+            'budget': forms.Select(attrs={
+                'class': INPUT_STYLE_BASE,
+            }),
+            'category': forms.Select(attrs={
+                'class': INPUT_STYLE_BASE,
+            }),
+            'description': forms.Textarea(attrs={
+                'class': INPUT_STYLE_BASE,
+            }),
+            'notes': forms.Textarea(attrs={
+                'class': INPUT_STYLE_BASE,
+            })
+        }
