@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.db.models import Sum
 
 from . import forms
 from .models import Expense, Category, Budget
@@ -41,6 +42,11 @@ class BudgetListView(LoginRequiredMixin, ListView):
     extra_context = {
         "title": "Budget List",
     }
+
+    def get_queryset(self):
+        return Budget.objects.annotate(
+            total_expenses=Sum("expenses__amount")
+        )
 
 
 class BudgetDetailView(LoginRequiredMixin, DetailView):

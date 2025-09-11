@@ -13,6 +13,7 @@
         <tr>
             <th>Name</th>
             <th>Total Amount</th>
+            <th>Total Expenses</th>
             <th>Start Date</th>
             <th>End Date</th>
         </tr>
@@ -24,6 +25,7 @@
                 <a href="/budgets/{{ budget.id }}">{{ budget.name }}</a>
             </td>
             <td>{{ budget.total_amount}}</td>
+            <td>{{ budget.total_expenses }}</td>
             <td>{{ budget.start_date}}</td>
             <td>{{ budget.end_date }}</td>
         </tr>
