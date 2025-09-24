@@ -3,34 +3,36 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="p-4 flex w-full justify-between items-center">
-    <h1 class="font-bold text-xl">{{ title }}</h1>
-        <a class="text-blue-500 hover:text-blue-600 hover:underline" href="/budgets/create">Add Budget</a>
-</div>
 <div class="p-4">
-    <table class="table-auto w-full">
-        <thead class="border-b font-bold">
-        <tr>
-            <th>Name</th>
-            <th>Total Amount</th>
-            <th>Total Expenses</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for budget in budgets %}
-        <tr class="text-center">
-            <td class="text-left">
-                <a href="/budgets/{{ budget.id }}">{{ budget.name }}</a>
-            </td>
-            <td>{{ budget.total_amount}}</td>
-            <td>{{ budget.total_expenses }}</td>
-            <td>{{ budget.start_date}}</td>
-            <td>{{ budget.end_date }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="p-4 bg-white rounded-xl flex flex-col gap-4">
+        <div class="flex w-full justify-between items-center">
+            <h1 class="font-bold text-lg">Budgets</h1>
+            <a class="bg-blue-500 hover:bg-blue-600 hover:underline px-4 py-2 text-white rounded-lg" href="/budgets/create">Add Budget</a>
+        </div>
+        <table class="table-auto w-full ">
+            <thead class="border-y border-gray-300 font-bold">
+            <tr>
+                <th class="p-2 text-left">Name</th>
+                <th>Total Amount</th>
+                <th>Total Expenses</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for budget in budgets %}
+            <tr class="text-center hover:bg-gray-100">
+                <td class="text-left p-2">
+                    <a href="/budgets/{{ budget.id }}" class="text-blue-500 hover:text-blue-600">{{ budget.name }}</a>
+                </td>
+                <td>{{ budget.total_amount}}</td>
+                <td>{{ budget.total_expenses }}</td>
+                <td>{{ budget.start_date}}</td>
+                <td>{{ budget.end_date }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

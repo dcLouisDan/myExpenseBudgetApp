@@ -32,7 +32,10 @@ def login_view(request):
 
 @login_required(login_url='login')
 def index(request):
-    return render(request, "home.html")
+    context = {
+        'title': 'Home'
+    }
+    return render(request, "home.html", context)
 
 
 class BudgetListView(LoginRequiredMixin, ListView):

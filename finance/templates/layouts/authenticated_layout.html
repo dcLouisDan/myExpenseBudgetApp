@@ -1,24 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 {% block body %}
 <aside class="fixed h-screen l-0 w-64 flex flex-col pb-4">
-    <header class="flex p-4">
-        <h1 class="font-bold text-xl">My Finance App</h1>
+    <header class="flex px-4 py-6 items-center gap-4">
+        <img src="{% static 'images/pie-chart.png' %}" alt="logo" class="size-8">
+        <h1 class="font-black text-xl">MyFinanceApp</h1>
     </header>
-    <nav class="flex-1">
-        <ul>
-            {% include "components/nav_item.html" with url="/" label="Home" %}
-            {% include "components/nav_item.html" with url="/budgets" label="Budget" %}
-            {% include "components/nav_item.html" with url="/categories" label="Categories" %}
-            {% include "components/nav_item.html" with url="/expenses" label="Expenses" %}
-        </ul>
-    </nav>
+    {% include 'components/nav_list.html' %}
     <form method="post" action="logout/" class="px-4">
         {% csrf_token %}
         {% include 'components/button.html' with label='LOGOUT' type="submit" %}
     </form>
 </aside>
-<main class="ml-64 min-h-screen bg-gray-100">
+<main class="ml-64 min-h-screen bg-gray-200">
+    {% include 'components/main_header.html' %}
     {% block content %}
     {% endblock %}
 </main>
+
 {% endblock %}

@@ -1,0 +1,21 @@
+<nav class="flex-1">
+    <ul class="px-4 space-y-1">
+        {% include "components/nav_item.html" with url="/" label="Home" icon="bi-house" %}
+        {% include "components/nav_item.html" with url="/budgets" label="Budget" icon="bi-coin" %}
+        {% include "components/nav_item.html" with url="/categories" label="Categories" icon="bi-list" %}
+        {% include "components/nav_item.html" with url="/expenses" label="Expenses" icon="bi-receipt" %}
+    </ul>
+</nav>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname;
+        const links = document.querySelectorAll('.nav-link');
+        links.forEach((link) => {
+            console.log(currentPath);
+            const url = link.getAttribute('href');
+            if (currentPath == url ) {
+                link.className = 'rounded-lg block px-4 py-2 hover:bg-blue-600 text-white bg-blue-500 flex items-center';
+            }
+        })
+    })
+</script>
